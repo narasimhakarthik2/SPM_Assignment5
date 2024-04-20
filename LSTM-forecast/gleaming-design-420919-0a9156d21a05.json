@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gleaming-design-420919",
+  "private_key_id": "0a9156d21a05e49116946c8017a20b5dee6d48da",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDoxtfyB3UWuvud\ndVUqlnKOP39wTUz6b9WKDL/BDQCV3fzP121zsmyR9GkIkfEKRxnoSa+yaE7KrWIf\nxOT0DhNwnne+y2H2UAbdEy1zPyUu03DRhYpDt6e6pcBiuVfy+KM1MeVUxjQq+zQD\nmgHqfl67+INWMhLMV7zCKO14m/CaOX3TxKJoJvcXJ/Zv0bGJNZ/6ZVMl59qaBKF6\nVGAltD1/of9YSM2BKfVW2Ur4JSfvdKK2Wzuop8qlkheOeNPLUX861ABjqQbSwyGH\ntkDn7247mdG4PGobRj+aBmksR5eCOR33+WW/gwBtUO26IrpU0HMCtsYzgI02CbLh\nt3xdKapDAgMBAAECggEAUP2idB0hIbwEQOhqrgszp4ezXQ0gTACuUT6XV2GhQwO+\na0h+1iMOAIiEJQ22SserXXWJ8q61P3KtMfWNXdcp72TLsDBOkOeOQ8xg43jkhJLf\n7Z6jmWUksF3sfs0TK0BUdPU74E+oJg5KLjifEwpOBuP0OoDopn2eeQXJfk3vnJDb\ndSztqnOBFnXCi1yVosRB8Wjjv3fosrxpWcPzt0OSAsI36DCOWruw2qSi5bnvlveN\nyZheTKnwL6bD4b8veEn/QXc3kdsL7q9n9OoxquVU1QLaOX8k5uc3V6hLvg10AggZ\nIdzPii4z7CZ8yVo0UvmFkCQaud+eazB2CQctHnKzqQKBgQD1sFpWncc1iD+3lS3G\nqAMqX+9+kqZxUhEjGBSwCVF+BWg22cP2DX7XhBni4ktwieBYliTdV5N9qYK5Qzma\nOvy75WfSoFzC0J1CmjAoL215wrmxo5c+AS5WS4mrbsJg0pIbf9pJF84w8DFxmF9J\noCjCNWu0LdLwvRZh7zv8+kHJSwKBgQDyi8OsuXKbAuNFoMrlqS6W4imQjxr9u1+A\nIhhgmwhRfAIaEFhA8+rvOmTbJpjfSt52YV8HESU4o/xsNC+wqfwcGs67sRegGXwX\nYk2/hcG4ihnbT/VEA7psNoQz2S5cs0zHF0YalXcvawsNgSFCzvBVXmSEfFSsrjkg\nthGDvEA/6QKBgQCIIdwcbDYKImFzvlPr5AJFA303O9i/p4JZWKl11OPzmNliswzS\nlC25CrgxL8QvKiZFz4PDpRfTJA6LyoTrQU3yaq05VqOvSlooojiWu5jEQ7ISjJtr\nvsnHBPnWJHvNnD9av1/a6jbUhPJQh+YcbILJAUKZRl7AB3WUdDNf++ZhuwKBgGt6\nVZZHgyp/iBiFnQNSCewgggyl7W78ReBwu16rtG7vRbso/QKjU7r4pFKccueXtKa+\nlS57gYPs3uFP6sYdPTNzCaMQYYi3Yk62Z/9zlRliUPznHKcsA8MKEWEsXygC6AXd\nIVqMWwkvJPGyA/wn2UXrEx3GPntapMQDChXXKJ1pAoGAHo24vfC9ccEyFRvlhV1o\nFgJIv08awX0ytJz5eqzPpPeSzjEAk5D3xakUCTNa49AeNCDEyPJpe4xCmloranyG\nx/YTyh+KHpI2d7/yb9TrfUEZURPk+7eH2Gc7lkBcukThLCJrKbc8rw6GolydWrvO\nPVB/Qdsls6xGEPecDOdZ7hE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "kar-flask-lstm-react@gleaming-design-420919.iam.gserviceaccount.com",
+  "client_id": "102252494913570081194",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kar-flask-lstm-react%40gleaming-design-420919.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
