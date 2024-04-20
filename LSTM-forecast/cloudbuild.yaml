@@ -2,16 +2,19 @@ steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/gleaming-design-420919/lstm', '.']
+  dir: '/LSTM-forecast/'
+
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/gleaming-design-420919/lstm']
+
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
   args: [
   'run', 
   'deploy', 
-  '$lstm', 
+  'lstm',
   '--image', 
   'gcr.io/gleaming-design-420919/lstm', 
   '--region', 
@@ -27,6 +30,3 @@ steps:
   '--set-env-vars', 
   'GOOGLE_APPLICATION_CREDENTIALS=gleaming-design-420919-0a9156d21a05.json,BASE_IMAGE_PATH=https://storage.googleapis.com/lstm-kar/,BUCKET_NAME=lstm-kar'
 ]
-
-images:
-- gcr.io/gleaming-design-420919/lstm
