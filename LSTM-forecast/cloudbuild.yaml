@@ -2,7 +2,7 @@ steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/gleaming-design-420919/lstm', '.']
-  dir: '/LSTM-forecast/'
+  dir: '/workspace/LSTM-forecast'
 
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
