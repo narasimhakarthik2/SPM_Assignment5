@@ -239,7 +239,7 @@ def github():
 
 
     '''8.1 The day of the week maximum number of issues created'''
-    issue_dates = [datetime.strptime(issue['created_at'], "%Y-%m-%dT%H:%M:%SZ").date() for issue in all_issues if 'created_at' in issue]
+    issue_dates = [datetime.strptime(issue['created_at'], "%Y-%m-%dT%H:%M:%SZ").date() for issue in issues_reponse if 'created_at' in issue]
     issue_df = pd.DataFrame({'date': issue_dates})
     issue_df['date'] = pd.to_datetime(issue_df['date'])
     start_date = datetime.now() - timedelta(days=365*2)
