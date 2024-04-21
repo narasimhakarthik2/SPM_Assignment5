@@ -28,5 +28,5 @@ steps:
   '--memory', 
   '1Gi',
   '--set-env-vars', 
-  'GITHUB_TOKEN=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'
+  'GITHUB_TOKEN='
 ]
