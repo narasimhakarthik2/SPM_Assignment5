@@ -1,13 +1,14 @@
+
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 // Refer the high charts "https://github.com/highcharts/highcharts-react" for more information
 
-const BarCharts = (props) => {
+const LineCharts = (props) => {
   const config = {
     chart: {
-      type: "column",
+      type: "line",
     },
     title: {
       text: props.title,
@@ -25,20 +26,19 @@ const BarCharts = (props) => {
     yAxis: {
       min: 0,
       title: {
-        text: "Issues",
+        text: "Issue",
       },
     },
     legend: {
       enabled: false,
     },
     tooltip: {
-      pointFormat: "Issues: <b>{point.y} </b>",
+      pointFormat: "<b>{point.y} </b>",
     },
     series: [
       {
         name: props.title,
         data: props.data,
-        color: "#800080",
         dataLabels: {
           enabled: true,
           rotation: -90,
@@ -66,4 +66,4 @@ const BarCharts = (props) => {
   );
 };
 
-export default BarCharts;
+export default LineCharts;

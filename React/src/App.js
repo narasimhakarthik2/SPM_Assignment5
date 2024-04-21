@@ -1,11 +1,22 @@
-import Home from './components/Home';
+import Home from "./components/Home";
+import Stats from "./components/Stats.js";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Home />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/stats" element={<Stats />} />
+    </Routes>
   );
 }
 
-export default App;
+function OuterApp() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default OuterApp;

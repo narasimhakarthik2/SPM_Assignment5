@@ -26,28 +26,68 @@ import Loader from "./Loader";
 import { ListItemButton } from "@mui/material";
 
 const drawerWidth = 240;
-// List of GitHub repositories 
+// List of GitHub repositories
 const repositories = [
   {
-    key: "openai/openai-cookbook",
-    value: "openai-cookbook",
+    key: "angular/angular",
+    value: "Angular",
   },
   {
-    key: "elastic/elasticsearch",
-    value: "elasticsearch",
+    key: "angular/angular-cli",
+    value: "Angular-cli",
+  },
+  {
+    key: "angular/material",
+    value: "Angular Material",
+  },
+  {
+    key: "d3/d3",
+    value: "D3",
+  },
+  {
+    key: "openai/openai-cookbook",
+    value: "Open API Cookbook",
   },
   {
     key: "openai/openai-python",
-    value: "openai-python",
+    value: "Open API Python",
   },
   {
-    key: "milvus-io/pymilvus",
-    value: "pymilvus",
+    key: "milvus-io/pymilvus/",
+    value: "Milvus",
   },
   {
-    key: "SebastianM",
-    value: "angular-google-maps"
-  }
+    key: "SeleniumHQ/selenium",
+    value: "Selenuim",
+  },
+  {
+    key: "golang/go",
+    value: "GO",
+  },
+  {
+    key: "google/go-github",
+    value: "Google Go GitHub",
+  },
+  {
+    key: "sebholstein/angular-google-maps",
+    value: "Angular Google Maps",
+  },
+  {
+    key: "facebook/react",
+    value: "React",
+  },
+  {
+    key: "tensorflow/tensorflow",
+    value: "Tensorflow",
+  },
+  {
+    key: "keras-team/keras",
+    value: "Keras",
+  },
+  {
+    key: "pallets/flask",
+    value: "Flask",
+  },
 ];
 
 export default function Home() {
@@ -66,8 +106,8 @@ export default function Home() {
   The repository "key" will be sent to flask microservice in a request body
   */
   const [repository, setRepository] = useState({
-    key: "openai/openai-cookbook",
-    value: "openai-cookbook",
+    key: "angular/angular",
+    value: "Angular",
   });
   /*
   
@@ -91,6 +131,7 @@ export default function Home() {
   React.useEffect(() => {
     // set loading to true to display loader
     setLoading(true);
+    const proxy = "https://flask1-ftwyhufr2a-uc.a.run.app"
     const requestOptions = {
       method: "POST",
       headers: {
@@ -107,7 +148,7 @@ export default function Home() {
     Which is routed by setupProxy.js to the
     microservice target: "your_flask_gcloud_url"
     */
-    fetch("/api/github", requestOptions)
+    fetch(proxy+"/api/github", requestOptions)
       .then((res) => res.json())
       .then(
         // On successful response from flask microservice
@@ -134,12 +175,34 @@ export default function Home() {
       {/* Application Header */}
       <AppBar
         position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: "Coral",
+        }}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Timeseries Forecasting
+            Forecasting Timeseries
           </Typography>
+
+          <div
+            style={{ display: "flex", marginLeft: "100px", cursor: "pointer" }}
+          >
+            <div color="primary" variant="contained">
+              <a href="/" style={{ color: "white" }}>
+                Forecast
+              </a>
+            </div>
+            <div
+              color="primary"
+              variant="contained"
+              style={{ marginLeft: "10px", cursor: "pointer" }}
+            >
+              <a href="/stats" style={{ color: "white" }}>
+                Statistics
+              </a>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
       {/* Left drawer of the application */}
@@ -182,12 +245,12 @@ export default function Home() {
           <div>
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
             <BarCharts
-              title={`Monthly Created Issues for ${repository.value} in last 1 year`}
+              title={`Monthly Created Issues for ${repository.value} in the last 2 months`}
               data={githubRepoData?.created}
             />
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
             <BarCharts
-              title={`Monthly Closed Issues for ${repository.value} in last 1 year`}
+              title={`Monthly Closed Issues for ${repository.value} in the last 2 months`}
               data={githubRepoData?.closed}
             />
             <Divider
@@ -208,7 +271,7 @@ export default function Home() {
                 {/* Render the model loss image for created issues */}
                 <img
                   src={githubRepoData?.createdAtImageUrls?.model_loss_image_url}
-                  alt={"Model Loss for Created Issues"}
+                  alt={"Model Loss for the Issues Created"}
                   loading={"lazy"}
                 />
               </div>
@@ -221,7 +284,7 @@ export default function Home() {
                   src={
                     githubRepoData?.createdAtImageUrls?.lstm_generated_image_url
                   }
-                  alt={"LSTM Generated Data for Created Issues"}
+                  alt={"LSTM Generated Data for the Issues Created"}
                   loading={"lazy"}
                 />
               </div>
@@ -234,7 +297,7 @@ export default function Home() {
                   src={
                     githubRepoData?.createdAtImageUrls?.all_issues_data_image
                   }
-                  alt={"All Issues Data for Created Issues"}
+                  alt={"All Issues Data for the Issues Created"}
                   loading={"lazy"}
                 />
               </div>
@@ -247,36 +310,36 @@ export default function Home() {
               />
               <Typography variant="h5" component="div" gutterBottom>
                 Timeseries Forecasting of Closed Issues using Tensorflow and
-                Keras LSTM based on past month
+                Keras LSTM based on the past month
               </Typography>
 
               <div>
                 <Typography component="h4">
-                  Model Loss for Closed Issues
+                  Model Loss for the Issues Created
                 </Typography>
                 {/* Render the model loss image for closed issues  */}
                 <img
                   src={githubRepoData?.closedAtImageUrls?.model_loss_image_url}
-                  alt={"Model Loss for Closed Issues"}
+                  alt={"Model Loss for the Issues Closed"}
                   loading={"lazy"}
                 />
               </div>
               <div>
                 <Typography component="h4">
-                  LSTM Generated Data for Closed Issues
+                  LSTM Generated Data for the Issues Closed
                 </Typography>
                 {/* Render the LSTM generated image for closed issues */}
                 <img
                   src={
                     githubRepoData?.closedAtImageUrls?.lstm_generated_image_url
                   }
-                  alt={"LSTM Generated Data for Closed Issues"}
+                  alt={"LSTM Generated Data for the issues closed"}
                   loading={"lazy"}
                 />
               </div>
               <div>
                 <Typography component="h4">
-                  All Issues Data for Closed Issues
+                  All Issues Data for the Issues Closed 
                 </Typography>
                 {/* Render the all issues data image for closed issues*/}
                 <img
