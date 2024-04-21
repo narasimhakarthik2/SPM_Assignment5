@@ -358,7 +358,7 @@ def analyze_commit_data():
     return jsonify(response_data)
 
 @app.route('/api/fbprophet-is', methods=['POST'])
-def forecast_issues_with_fbprophet():
+def forecast_createdAt_issues_with_fbprophet():
     """
     Handles POST request to forecast GitHub issues data using Facebook Prophet.
     Generates and uploads forecast and component plots to Google Cloud Storage.
@@ -418,7 +418,7 @@ def forecast_issues_with_fbprophet():
 
 
 @app.route('/api/fbprophet-isc', methods=['POST'])
-def forecast_issues_with_fbprophet():
+def forecast_closedAt_issues_with_fbprophet():
     """
     Handles POST request to forecast GitHub issues data using Facebook Prophet.
     Generates and uploads forecast and component plots to Google Cloud Storage.
