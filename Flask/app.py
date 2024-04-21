@@ -141,37 +141,37 @@ def github():
     df = pd.DataFrame(issues_reponse)
     print(df)
     # Daily Created Issues
-    df_created_at = df.groupby(['created_at'], as_index=False).count()
-    dataFrameCreated = df_created_at[['created_at', 'issue_number']]
-    dataFrameCreated.columns = ['date', 'count']
-    temp2 = dataFrameCreated.values.tolist()
-    # issues_created_df1 =[]
-    issues_created_df2 = []
-    i=0
-    while i < len(temp2):
-        data = {}
-        data['date'] = temp2[i][0]
-        data['count'] = temp2[i][1]
-        i=i+1
-        arr = [data['date'],data['count']]
-        issues_created_df2.append(arr)
-        # issues_created_df1.append(data)
+    # df_created_at = df.groupby(['created_at'], as_index=False).count()
+    # dataFrameCreated = df_created_at[['created_at', 'issue_number']]
+    # dataFrameCreated.columns = ['date', 'count']
+    # temp2 = dataFrameCreated.values.tolist()
+    # # issues_created_df1 =[]
+    # issues_created_df2 = []
+    # i=0
+    # while i < len(temp2):
+    #     data = {}
+    #     data['date'] = temp2[i][0]
+    #     data['count'] = temp2[i][1]
+    #     i=i+1
+    #     arr = [data['date'],data['count']]
+    #     issues_created_df2.append(arr)
+    #     # issues_created_df1.append(data)
     
 
 
-    # Daily Closed Issues
-    df_closed_at = df[df['state'] == 'closed'].groupby(['closed_at'], as_index=False).count()
-    dataFrameClosed = df_closed_at[['closed_at', 'issue_number']]
-    dataFrameClosed.columns = ['date', 'count']
-    temp_closed = dataFrameClosed.values.tolist()
+    # # Daily Closed Issues
+    # df_closed_at = df[df['state'] == 'closed'].groupby(['closed_at'], as_index=False).count()
+    # dataFrameClosed = df_closed_at[['closed_at', 'issue_number']]
+    # dataFrameClosed.columns = ['date', 'count']
+    # temp_closed = dataFrameClosed.values.tolist()
 
-    issues_closed_df = []
-    for item in temp_closed:
-        data = {
-            'date': item[0],
-            'count': item[1]
-        }
-        issues_closed_df.append([data['date'], data['count']])
+    # issues_closed_df = []
+    # for item in temp_closed:
+    #     data = {
+    #         'date': item[0],
+    #         'count': item[1]
+    #     }
+    #     issues_closed_df.append([data['date'], data['count']])
 
 
     '''
