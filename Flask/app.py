@@ -89,7 +89,7 @@ def github():
         error_msg = {"error": "GitHub token is missing"}
         return jsonify(error_msg), 500
 
-    GITHUB_URL = "https://api.github.com"
+    GITHUB_URL = "https://api.github.com/"
     headers = {"Authorization": f"token {token}"}
     
     # Fetch data for the last 2 years
