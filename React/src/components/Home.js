@@ -244,9 +244,21 @@ export default function Home() {
         ) : (
           <div>
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
-            <BarCharts
-              title={`Monthly Created Issues for ${repository.value} in the last 2 months`}
-              data={githubRepoData?.created}
+            <div>
+              <Typography variant="h5" component="div" gutterBottom>
+                Monthly Created Issues for {repository.value} in the last 2 months
+              </Typography>
+              <img
+                src="React/src/components/static/forecast_plot-8.1.png"
+                alt=""
+                loading={"lazy"}/>
+            </div>
+
+            <title>Monthly Created Issues for ${repository.value} in the last 2 months</title>
+            <img
+              src="/static/img1.png"
+              alt=""
+              loading={"lazy"}
             />
             {/* Render barchart component for a monthly created issues for a selected repositories*/}
             <BarCharts
