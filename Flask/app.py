@@ -53,6 +53,31 @@ def convert_to_day(param):
     ans = datetime.date(day, month, year)
     return ans.strftime("%A")
 
+def fetch(url, params):
+    all_data = []
+    page = 1
+    token = os.environ.get('GITHUB_TOKEN')
+    headers = {"Authorization": f"token {token}"}
+    
+    while len(all_data) < 1200:
+        params['page'] = page
+        response = requests.get(url, params=params, headers=headers)
+        data = response.json()
+        if not data:
+            break
+        all_data.extend(data)
+        page += 1
+        
+    return all_data
+
+def get_repository_issues(repo):
+    issues_url = f"https://api.github.com/repos/{repo}/issues"
+    params = {
+        "state": "all",
+        "per_page": 100
+    }
+    return fetch(issues_url, params)
+
 #create a repositories to iterate the stars and count
 repositories = [
     "openai/openai-cookbook",
@@ -105,40 +130,16 @@ def github():
         return jsonify(error_msg), repository.status_code
     
     repository = repository.json()
-    print(repository)
     today = date.today()
 
     issues_reponse = []
-    for i in range(24):
-        last_month = today + dateutil.relativedelta.relativedelta(months=-1)
-        types = 'type:issue'
-        repo = 'repo:' + repo_name
-        ranges = 'created:' + str(last_month) + '..' + str(today)
-        per_page = 'per_page=100'
-        search_query = types + ' ' + repo + ' ' + ranges
+    for repo in repositories:
+        issues = get_repository_issues(repo)
+        issues_reponse.extend(issues)
 
-        query_url = GITHUB_URL + "/search/issues?q=" + search_query + "&" + per_page
-        search_issues = requests.get(query_url, headers=headers, params=params)
-        search_issues = search_issues.json()
-        issues_items = search_issues.get("items", [])
-        for issue in issues_items:
-            label_name = []
-            data = {}
-            current_issue = issue
-            data['issue_number'] = current_issue["number"]
-            data['created_at'] = current_issue["created_at"][0:10]
-            data['closed_at'] = current_issue["closed_at"][0:10] if current_issue["closed_at"] else None
-            for label in current_issue["labels"]:
-                label_name.append(label["name"])
-            data['labels'] = label_name
-            data['State'] = current_issue["state"]
-            data['Author'] = current_issue["user"]["login"]
-            issues_reponse.append(data)
-
-        today = last_month
-
+    
     df = pd.DataFrame(issues_reponse)
-
+    print(df)
     # Daily Created Issues
     df_created_at = df.groupby(['created_at'], as_index=False).count()
     dataFrameCreated = df_created_at[['created_at', 'issue_number']]
@@ -235,6 +236,22 @@ def github():
     for key in month_issue_closed_dict.keys():
         array = [str(key), month_issue_closed_dict[key]]
         closed_at_issues.append(array)
+
+
+    '''8.1 The day of the week maximum number of issues created'''
+    issue_dates = [datetime.strptime(issue['created_at'], "%Y-%m-%dT%H:%M:%SZ").date() for issue in all_issues if 'created_at' in issue]
+    issue_df = pd.DataFrame({'date': issue_dates})
+    issue_df['date'] = pd.to_datetime(issue_df['date'])
+    start_date = datetime.now() - timedelta(days=365*2)
+    issue_df = issue_df[issue_df['date'] >= start_date]
+    issue_df['week'] = issue_df['date'].dt.strftime('%Y-%U')
+    day_counts_per_week = issue_df.groupby(['week', issue_df['date'].dt.day_name()]).size().reset_index(name='count')
+    max_day_per_week = day_counts_per_week.groupby('week')['count'].idxmax()
+    max_day_df = day_counts_per_week.loc[max_day_per_week]
+    max_day_df['week'] = pd.to_datetime(max_day_df['week'] + '-0', format='%Y-%U-%w')
+    max_day_df.set_index('week', inplace=True)
+    prophet_data = max_day_df.reset_index().rename(columns={'week': 'ds', 'count': 'y'})
+
 
     '''
         1. Hit LSTM Microservice by passing issues_response as body
@@ -351,7 +368,7 @@ def github():
                                         json=created_at_body,
                                         headers={'content-type': 'application/json'})
 
-    print("create req fb res: ",created_at_response_fb.json())
+    print("create req fb res: ", created_at_response_fb.json())
 
     closed_at_fb_response = requests.post(LSTM_API_URL+"api/fbprophet-isc",
                                        json=closed_at_body,
