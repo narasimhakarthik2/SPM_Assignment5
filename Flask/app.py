@@ -78,26 +78,33 @@ This API will accept only POST request
 @app.route('/api/github', methods=['POST'])
 def github():
     body = request.get_json()
-    # Extract the choosen repositories from the request
-    repo_name = body['repository']
-    # Add your own GitHub Token to run it local
-    token = os.environ.get(
-        'GITHUB_TOKEN', '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')
-    GITHUB_URL = f"https://api.github.com/"
-    headers = {
-        "Authorization": f'token {token}'
-    }
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=365*2)
+    repo_name = body.get('repository')
+
+    if not repo_name:
+        error_msg = {"error": "Repository name is missing in the request"}
+        return jsonify(error_msg), 400
+
+    token = os.environ.get('GITHUB_TOKEN')
+    if not token:
+        error_msg = {"error": "GitHub token is missing"}
+        return jsonify(error_msg), 500
+
+    GITHUB_URL = "https://api.github.com"
+    headers = {"Authorization": f"token {token}"}
+    
+    # Fetch data for the last 2 years
+    end_date = datetime.datetime.now()
+    start_date = end_date - datetime.timedelta(days=365 * 2)
     since_date_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
-    params = {
-        "state": "open",
-        "since": since_date_str
-    }
-    repository_url = GITHUB_URL + "repos/" + repo_name
-    # Fetch GitHub data from GitHub API
-    repository = requests.get(repository_url, params = params, headers=headers)
-    # Convert the data obtained from GitHub API to JSON format
+    params = {"state": "open", "since": since_date_str}
+    
+    repository_url = f"{GITHUB_URL}/repos/{repo_name}"
+    repository = requests.get(repository_url, params=params, headers=headers)
+    
+    if repository.status_code != 200:
+        error_msg = {"error": "Failed to fetch repository data from GitHub API"}
+        return jsonify(error_msg), repository.status_code
+    
     repository = repository.json()
 
     today = date.today()
