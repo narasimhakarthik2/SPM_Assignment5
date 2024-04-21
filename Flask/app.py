@@ -17,13 +17,13 @@ Use Python/GitHub API to retrieve Issues/Repos information of the past 1 year fo
 '''
 # Import all the required packages 
 import os
-import datetime
+# import datetime
 from flask import Flask, jsonify, request, make_response, Response
 from flask_cors import CORS
 import json
 import dateutil.relativedelta
 from dateutil import *
-from datetime import date
+from datetime import date, datetime
 import pandas as pd
 import requests
 
