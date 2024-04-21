@@ -179,7 +179,7 @@ def github():
     # Format the data by grouping the data by week
     '''
     created_at = df['created_at']
-    week_issue_created = pd.to_datetime(pd.Series(created_at), format='%Y-%m-%d')
+    week_issue_created = pd.to_datetime(pd.Series(created_at), format='%Y-%m-%dT%H:%M:%SZ')
     week_issue_created.index = week_issue_created.dt.to_period('W')
     week_issue_created = week_issue_created.groupby(level=0).size()
     week_issue_created_dict = week_issue_created.to_dict()
@@ -193,7 +193,7 @@ def github():
     # Format the data by grouping the data by week
     '''
     closed_at = df['closed_at'].sort_values(ascending=True)
-    week_issue_closed = pd.to_datetime(pd.Series(closed_at), format='%Y-%m-%d')
+    week_issue_closed = pd.to_datetime(pd.Series(closed_at), format='%Y-%m-%dT%H:%M:%SZ')
     week_issue_closed.index = week_issue_closed.dt.to_period('W')
     week_issue_closed = week_issue_closed.groupby(level=0).size()
     week_issue_closed_dict = week_issue_closed.to_dict()
@@ -208,7 +208,7 @@ def github():
     ''' 
     created_at = df['created_at']
     month_issue_created = pd.to_datetime(
-        pd.Series(created_at), format='%Y-%m-%d')
+        pd.Series(created_at), format='%Y-%m-%dT%H:%M:%SZ')
     month_issue_created.index = month_issue_created.dt.to_period('m')
     month_issue_created = month_issue_created.groupby(level=0).size()
     month_issue_created = month_issue_created.reindex(pd.period_range(
@@ -226,7 +226,7 @@ def github():
     
     closed_at = df['closed_at'].sort_values(ascending=True)
     month_issue_closed = pd.to_datetime(
-        pd.Series(closed_at), format='%Y-%m-%d')
+        pd.Series(closed_at), format='%Y-%m-%dT%H:%M:%SZ')
     month_issue_closed.index = month_issue_closed.dt.to_period('m')
     month_issue_closed = month_issue_closed.groupby(level=0).size()
     month_issue_closed = month_issue_closed.reindex(pd.period_range(
