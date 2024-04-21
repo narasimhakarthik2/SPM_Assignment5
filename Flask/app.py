@@ -68,7 +68,9 @@ names = [
     "Openai-python",
     "Pymilvus",
     "Angular-googlemaps"
-]'''
+]
+
+'''
 API route path is  "/api/forecast"
 This API will accept only POST request
 '''

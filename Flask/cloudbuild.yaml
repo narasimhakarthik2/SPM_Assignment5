@@ -26,7 +26,5 @@ steps:
   '--cpu', 
   '1',
   '--memory', 
-  '1Gi',
-  '--set-env-vars', 
-  'GITHUB_TOKEN='
+  '1Gi'
 ]
