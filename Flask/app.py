@@ -136,7 +136,7 @@ def github():
     for repo in repositories:
         issues = get_repository_issues(repo)
         issues_reponse.extend(issues)
-
+    print(issues_reponse)
     repo_info = []
     
     
@@ -313,126 +313,126 @@ def github():
     closed_at_response = requests.post(LSTM_API_URL,
                                        json=closed_at_body,
                                        headers={'content-type': 'application/json'})
-    # 6. Plot the pulls forecast
-    pull_request_response = requests.post(LSTM_API_URL+"api/pulls",
-                                       json=pull_request_body,
-                                       headers={'content-type': 'application/json'})
-    print("pull req res: ",pull_request_response.json())
+    # # 6. Plot the pulls forecast
+    # pull_request_response = requests.post(LSTM_API_URL+"api/pulls",
+    #                                    json=pull_request_body,
+    #                                    headers={'content-type': 'application/json'})
+    # print("pull req res: ",pull_request_response.json())
    
-    # 7. Plot the commits forecast
-    commits_response = requests.post(LSTM_API_URL+"api/commits",
-                                       json=commits_body,
-                                       headers={'content-type': 'application/json'})
-    print("commits req res: ",commits_response.json())
+    # # 7. Plot the commits forecast
+    # commits_response = requests.post(LSTM_API_URL+"api/commits",
+    #                                    json=commits_body,
+    #                                    headers={'content-type': 'application/json'})
+    # print("commits req res: ",commits_response.json())
 
-    # 8. Plot the branches forecast
-    branches_response = requests.post(LSTM_API_URL_FINAL + "api/branches",
-                                  json=branches_body,
-                                  headers={'content-type': 'application/json'})
-    print("branches req res: ", branches_response.json())
+    # # 8. Plot the branches forecast
+    # branches_response = requests.post(LSTM_API_URL_FINAL + "api/branches",
+    #                               json=branches_body,
+    #                               headers={'content-type': 'application/json'})
+    # print("branches req res: ", branches_response.json())
 
-    # 9. Plot the contributors forecast
-    contributors_response = requests.post(LSTM_API_URL_FINAL + "api/contributors",
-                                      json=contributors_body,
-                                      headers={'content-type': 'application/json'})
-    print("contributors req res: ", contributors_response.json())
+    # # 9. Plot the contributors forecast
+    # contributors_response = requests.post(LSTM_API_URL_FINAL + "api/contributors",
+    #                                   json=contributors_body,
+    #                                   headers={'content-type': 'application/json'})
+    # print("contributors req res: ", contributors_response.json())
 
-    # 10. Plot the releases forecast
-    releases_response = requests.post(LSTM_API_URL_FINAL + "api/releases",
-                                  json=releases_body,
-                                  headers={'content-type': 'application/json'})
-    print("releases req res: ", releases_response.json())
+    # # 10. Plot the releases forecast
+    # releases_response = requests.post(LSTM_API_URL_FINAL + "api/releases",
+    #                               json=releases_body,
+    #                               headers={'content-type': 'application/json'})
+    # print("releases req res: ", releases_response.json())
     
-    #stats model
-    created_at_response_stat = requests.post(LSTM_API_URL+"api/statmis",
-                                        json=created_at_body,
-                                        headers={'content-type': 'application/json'})
+    # #stats model
+    # created_at_response_stat = requests.post(LSTM_API_URL+"api/statmis",
+    #                                     json=created_at_body,
+    #                                     headers={'content-type': 'application/json'})
 
-    print("create req stat res: ",created_at_response_stat.json())
+    # print("create req stat res: ",created_at_response_stat.json())
 
-    closed_at_response_stat = requests.post(LSTM_API_URL+"api/statmisc",
-                                       json=closed_at_body,
-                                       headers={'content-type': 'application/json'})
+    # closed_at_response_stat = requests.post(LSTM_API_URL+"api/statmisc",
+    #                                    json=closed_at_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("create req stat res: ",closed_at_response_stat.json())
+    # print("create req stat res: ",closed_at_response_stat.json())
 
-    pull_request_rpnse_stat = requests.post(LSTM_API_URL+"api/statmpull",
-                                       json=pull_request_body,
-                                       headers={'content-type': 'application/json'})
+    # pull_request_rpnse_stat = requests.post(LSTM_API_URL+"api/statmpull",
+    #                                    json=pull_request_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("pull req stat res: ",pull_request_rpnse_stat.json())
+    # print("pull req stat res: ",pull_request_rpnse_stat.json())
    
-    commits_respnse_stat = requests.post(LSTM_API_URL+"api/statmcommits",
-                                       json=commits_body,
-                                       headers={'content-type': 'application/json'})
+    # commits_respnse_stat = requests.post(LSTM_API_URL+"api/statmcommits",
+    #                                    json=commits_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("commits req stat res: ",commits_respnse_stat.json())
+    # print("commits req stat res: ",commits_respnse_stat.json())
     
-    branches_respnse_stat = requests.post(LSTM_API_URL+"api/statmbranches",
-                                       json=branches_body,
-                                       headers={'content-type': 'application/json'})
+    # branches_respnse_stat = requests.post(LSTM_API_URL+"api/statmbranches",
+    #                                    json=branches_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("branches req stat res: ",branches_respnse_stat.json())
-
-
-    contributors_respnse_stat = requests.post(LSTM_API_URL+"api/statmcontributors",
-                                       json=contributors_body,
-                                       headers={'content-type': 'application/json'})
-
-    print("contributors req stat res: ",contributors_respnse_stat.json())
-
-    releases_respnse_stat = requests.post(LSTM_API_URL+"api/statmreleases",
-                                       json=releases_body,
-                                       headers={'content-type': 'application/json'})
-
-    print("releases req stat res: ",releases_respnse_stat.json())
+    # print("branches req stat res: ",branches_respnse_stat.json())
 
 
+    # contributors_respnse_stat = requests.post(LSTM_API_URL+"api/statmcontributors",
+    #                                    json=contributors_body,
+    #                                    headers={'content-type': 'application/json'})
+
+    # print("contributors req stat res: ",contributors_respnse_stat.json())
+
+    # releases_respnse_stat = requests.post(LSTM_API_URL+"api/statmreleases",
+    #                                    json=releases_body,
+    #                                    headers={'content-type': 'application/json'})
+
+    # print("releases req stat res: ",releases_respnse_stat.json())
 
 
-    #fb profet api routes
-    created_at_response_fb = requests.post(LSTM_API_URL+"api/fbprophet-is",
-                                        json=created_at_body,
-                                        headers={'content-type': 'application/json'})
 
-    print("create req fb res: ", created_at_response_fb.json())
 
-    closed_at_fb_response = requests.post(LSTM_API_URL+"api/fbprophet-isc",
-                                       json=closed_at_body,
-                                       headers={'content-type': 'application/json'})
+    # #fb profet api routes
+    # created_at_response_fb = requests.post(LSTM_API_URL+"api/fbprophet-is",
+    #                                     json=created_at_body,
+    #                                     headers={'content-type': 'application/json'})
 
-    print("Closed req fb res: ",closed_at_fb_response.json())
+    # print("create req fb res: ", created_at_response_fb.json())
 
-    pull_request_fb_rpnse = requests.post(LSTM_API_URL+"api/fbprophet-pull",
-                                       json=pull_request_body,
-                                       headers={'content-type': 'application/json'})
+    # closed_at_fb_response = requests.post(LSTM_API_URL+"api/fbprophet-isc",
+    #                                    json=closed_at_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("pull req fb res: ",pull_request_fb_rpnse.json())
+    # print("Closed req fb res: ",closed_at_fb_response.json())
+
+    # pull_request_fb_rpnse = requests.post(LSTM_API_URL+"api/fbprophet-pull",
+    #                                    json=pull_request_body,
+    #                                    headers={'content-type': 'application/json'})
+
+    # print("pull req fb res: ",pull_request_fb_rpnse.json())
    
-    commits_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-commits",
-                                       json=commits_body,
-                                       headers={'content-type': 'application/json'})
+    # commits_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-commits",
+    #                                    json=commits_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("commits req res: ",commits_fb_respnse.json())
+    # print("commits req res: ",commits_fb_respnse.json())
     
 
-    branches_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-branches",
-                                       json=branches_body,
-                                       headers={'content-type': 'application/json'})
+    # branches_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-branches",
+    #                                    json=branches_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("branches req res: ",branches_fb_respnse.json())
+    # print("branches req res: ",branches_fb_respnse.json())
 
-    contributors_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-contributors",
-                                       json=contributors_body,
-                                       headers={'content-type': 'application/json'})
+    # contributors_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-contributors",
+    #                                    json=contributors_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("contributors req res: ",contributors_fb_respnse.json())
+    # print("contributors req res: ",contributors_fb_respnse.json())
 
-    releases_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-releases",
-                                       json=releases_body,
-                                       headers={'content-type': 'application/json'})
+    # releases_fb_respnse = requests.post(LSTM_API_URL+"api/fbprophet-releases",
+    #                                    json=releases_body,
+    #                                    headers={'content-type': 'application/json'})
 
-    print("releases req res: ",releases_fb_respnse.json())
+    # print("releases req res: ",releases_fb_respnse.json())
 
     # For Stars & fork 
     total_count = []

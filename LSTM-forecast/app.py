@@ -78,8 +78,8 @@ def forecast():
     type = body["type"]
     repo_name = body["repo"]
     data_frame = pd.DataFrame(issues)
-    df1 = data_frame.groupby([type], as_index=False).count()
-    df = df1[[type, 'issue_number']]
+    df = data_frame.groupby([type], as_index=False).count()
+    # df = df1[[type, 'issue_number']]
     df.columns = ['ds', 'y']
 
     df['ds'] = df['ds'].astype('datetime64[ns]')
