@@ -137,6 +137,8 @@ def github():
         issues = get_repository_issues(repo)
         issues_reponse.extend(issues)
 
+    repo_info = []
+    
     
     df = pd.DataFrame(issues_reponse)
     print(df)
@@ -268,6 +270,31 @@ def github():
         "issues": issues_reponse,
         "type": "closed_at",
         "repo": repo_name.split("/")[1]
+    }
+
+    pull_request_body = {
+        "pull_requests": repository,  
+        "type": "pull_requests"
+    }
+
+    commits_body = {
+        "commits_request": repository,
+        "type": "commits" 
+    }
+
+    branches_body = {
+        "branches_request": repository,
+        "type": "branches"
+    }
+
+    contributors_body = {
+        "contributors_request": repository,
+        "type": "contributors"
+    }
+
+    releases_body = {
+        "releases_request": repository,
+        "type": "releases"
     }
 
     # Update your Google cloud deployed LSTM app URL (NOTE: DO NOT REMOVE "/")
