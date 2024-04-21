@@ -89,10 +89,9 @@ def github():
         error_msg = {"error": "GitHub token is missing"}
         return jsonify(error_msg), 500
 
-    GITHUB_URL = "https://api.github.com/"
+    GITHUB_URL = "https://api.github.com"
     headers = {"Authorization": f"token {token}"}
     
-    # Fetch data for the last 2 years
     end_date = datetime.datetime.now()
     start_date = end_date - datetime.timedelta(days=365 * 2)
     since_date_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -106,60 +105,33 @@ def github():
         return jsonify(error_msg), repository.status_code
     
     repository = repository.json()
-
+    print(repository)
     today = date.today()
 
     issues_reponse = []
-    # Iterating to get issues for every month for the past 2 years
     for i in range(24):
         last_month = today + dateutil.relativedelta.relativedelta(months=-1)
         types = 'type:issue'
         repo = 'repo:' + repo_name
         ranges = 'created:' + str(last_month) + '..' + str(today)
-        # By default GitHub API returns only 30 results per page
-        # The maximum number of results per page is 100
-        # For more info, visit https://docs.github.com/en/rest/reference/repos 
         per_page = 'per_page=100'
-        # Search query will create a query to fetch data for a given repository in a given time range
         search_query = types + ' ' + repo + ' ' + ranges
 
-        # Append the search query to the GitHub API URL 
-        query_url = GITHUB_URL + "search/issues?q=" + search_query + "&" + per_page
-        # requsets.get will fetch requested query_url from the GitHub API
+        query_url = GITHUB_URL + "/search/issues?q=" + search_query + "&" + per_page
         search_issues = requests.get(query_url, headers=headers, params=params)
-        # Convert the data obtained from GitHub API to JSON format
         search_issues = search_issues.json()
-        issues_items = []
-        try:
-            # Extract "items" from search issues
-            issues_items = search_issues.get("items")
-        except KeyError:
-            error = {"error": "Data Not Available"}
-            resp = Response(json.dumps(error), mimetype='application/json')
-            resp.status_code = 500
-            return resp
-        # if issues_items is None:
-        #     continue
+        issues_items = search_issues.get("items", [])
         for issue in issues_items:
             label_name = []
             data = {}
             current_issue = issue
-            # Get issue number
             data['issue_number'] = current_issue["number"]
-            # Get created date of issue
             data['created_at'] = current_issue["created_at"][0:10]
-            if current_issue["closed_at"] == None:
-                data['closed_at'] = current_issue["closed_at"]
-            else:
-                # Get closed date of issue
-                data['closed_at'] = current_issue["closed_at"][0:10]
+            data['closed_at'] = current_issue["closed_at"][0:10] if current_issue["closed_at"] else None
             for label in current_issue["labels"]:
-                # Get label name of issue
                 label_name.append(label["name"])
             data['labels'] = label_name
-            # It gives state of issue like closed or open
             data['State'] = current_issue["state"]
-            # Get Author of issue
             data['Author'] = current_issue["user"]["login"]
             issues_reponse.append(data)
 
