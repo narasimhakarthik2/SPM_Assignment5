@@ -23,7 +23,7 @@ from flask_cors import CORS
 import json
 import dateutil.relativedelta
 from dateutil import *
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import pandas as pd
 import requests
 
@@ -50,7 +50,7 @@ def build_actual_response(response):
 
 def convert_to_day(param):
     day, month, year = (int(x) for x in param.split('-'))    
-    ans = datetime.date(day, month, year)
+    ans = datetime(year, month, day).date()
     return ans.strftime("%A")
 
 def fetch(url, params):
@@ -117,7 +117,7 @@ def github():
     GITHUB_URL = "https://api.github.com"
     headers = {"Authorization": f"token {token}"}
     
-    end_date = datetime.datetime.now()
+    end_date = datetime.now()
     start_date = end_date - datetime.timedelta(days=365 * 2)
     since_date_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
     params = {"state": "open", "since": since_date_str}
@@ -130,7 +130,7 @@ def github():
         return jsonify(error_msg), repository.status_code
     
     repository = repository.json()
-    today = date.today()
+    today = datetime.today()
 
     issues_reponse = []
     for repo in repositories:
