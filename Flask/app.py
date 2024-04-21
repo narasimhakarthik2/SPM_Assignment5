@@ -118,7 +118,7 @@ def github():
     headers = {"Authorization": f"token {token}"}
     
     end_date = datetime.now()
-    start_date = end_date - datetime.timedelta(days=365 * 2)
+    start_date = end_date - timedelta(days=365 * 2)
     since_date_str = start_date.strftime("%Y-%m-%dT%H:%M:%SZ")
     params = {"state": "open", "since": since_date_str}
     
